@@ -29,8 +29,8 @@ export default async (req, res) => {
     const TEXT_LINE_MARGIN_SIZE = 16;
     const TEXT_MARGIN_X = 68;
 
-    const FONT_FAMILY = "myotyo";
-    const FONT_PATH = path.join(__dirname, "..", "fonts", "myotyo.ttf");
+    const FONT_FAMILY = "logotypejp_corpmin";
+    const FONT_PATH = path.join(__dirname, "..", "fonts", "logotypejp_corpmin.ttf");
 
     const BACKGROUND_IMAGE_PATH = path.join(__dirname, "..", "images", "ogp-trivia-background@2x.png");
     registerFont(FONT_PATH, { family: FONT_FAMILY });
