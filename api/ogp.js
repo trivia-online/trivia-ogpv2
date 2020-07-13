@@ -2,7 +2,9 @@ import * as path from "path";
 const { createCanvas, registerFont, loadImage } = require("canvas");
 
 export default async (req, res) => {
-  const { forwardText, backwardText, userName } = req.query;
+  const forwardText = req.query.forwardText || "";
+  const backwardText = req.query.backwardText || "";
+  const userName = req.query.userName || "";
 
   function splitByMeasureWidth(str, maxWidth, context) {
     const lines = [];
