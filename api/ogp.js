@@ -2,7 +2,7 @@ import * as path from "path";
 const { createCanvas, registerFont, loadImage } = require("canvas");
 
 export default async (req, res) => {
-  const { text } = req.query;
+  const { forwardText, backwardText, userName } = req.query;
 
   function splitByMeasureWidth(str, maxWidth, context) {
     const lines = [];
@@ -18,7 +18,7 @@ export default async (req, res) => {
     return lines;
   }
 
-  async function generateImage(text) {
+  async function generateImage(forwardText, backwardText, userName) {
     const CANVAS_WIDTH = 1200;
     const CANVAS_HEIGHT = 630;
 
@@ -41,7 +41,7 @@ export default async (req, res) => {
 
     context.font = `${TEXT_SIZE}px ${FONT_FAMILY}`;
     context.fillStyle = TEXT_COLOR;
-    const textLines = splitByMeasureWidth(text, CANVAS_WIDTH - TEXT_MARGIN_X, context);
+    const textLines = splitByMeasureWidth(forwardText, CANVAS_WIDTH - TEXT_MARGIN_X, context);
 
     let lineY = CANVAS_HEIGHT / 2 - ((TEXT_SIZE + TEXT_LINE_MARGIN_SIZE) / 2) * (textLines.length - 1);
 
@@ -55,7 +55,7 @@ export default async (req, res) => {
   }
 
   try {
-    const image = await generateImage(text);
+    const image = await generateImage(forwardText, backwardText, userName);
     res.writeHead(200, {
       "Content-Type": "image/png",
       "Content-Length": image.length,
