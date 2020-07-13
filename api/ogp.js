@@ -25,7 +25,7 @@ export default async (req, res) => {
     const CANVAS_HEIGHT = 630;
 
     const TEXT_COLOR = "#000000";
-    const TEXT_SIZE = 72;
+    const TEXT_SIZE = 60;
     const TEXT_LINE_MARGIN_SIZE = 16;
     const TEXT_MARGIN_X = 68;
 
