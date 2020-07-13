@@ -1,0 +1,14 @@
+{
+  "name": "trivia-ogp",
+  "version": "1.0.0",
+  "repository": "https://github.com/itizawa/trivia-ogp.git",
+  "author": "itizawa <itizawa@weseek.co.jp>",
+  "license": "MIT",
+  "scripts": {
+    "now-build": "yum install libuuid-devel libmount-devel && cp /lib64/{libuuid,libmount,libblkid}.so.1 node_modules/canvas/build/Release/"
+  },
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "path": "^0.12.7"
+  }
+}
