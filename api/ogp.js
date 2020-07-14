@@ -45,12 +45,12 @@ export default async (req, res) => {
     context.fillStyle = TEXT_COLOR;
     const textLines = splitByMeasureWidth(forwardText, CANVAS_WIDTH - TEXT_MARGIN_X, context);
 
-    let lineY = CANVAS_HEIGHT / 2 - ((TEXT_SIZE + TEXT_LINE_MARGIN_SIZE) / 2) * (textLines.length - 1);
+    let fowardTextLineY = CANVAS_HEIGHT / 4 - ((TEXT_SIZE + TEXT_LINE_MARGIN_SIZE) / 2) * (textLines.length - 1);
 
     textLines.forEach((line) => {
       const textWidth = context.measureText(line).width;
-      context.fillText(line, (CANVAS_WIDTH - textWidth) / 2, lineY);
-      lineY += TEXT_SIZE + TEXT_LINE_MARGIN_SIZE;
+      context.fillText(line, (CANVAS_WIDTH - textWidth) / 2, fowardTextLineY);
+      fowardTextLineY += TEXT_SIZE + TEXT_LINE_MARGIN_SIZE;
     });
 
     return canvas.toBuffer();
