@@ -20,6 +20,20 @@ export default async (req, res) => {
     return lines;
   }
 
+  function CreateMosaic(context, width, height, mosaicSize) {
+    var x = 0;
+    var y = 0;
+    for (y = 0; y < height; y = y + mosaicSize) {
+      for (x = 0; x < width; x = x + mosaicSize) {
+        var cR = imageData.data[(y * width + x) * 4];
+        var cG = imageData.data[(y * width + x) * 4 + 1];
+        var cB = imageData.data[(y * width + x) * 4 + 2];
+        context.fillStyle = "rgb(" + cR + "," + cG + "," + cB + ")";
+        context.fillRect(x, y, x + mosaicSize, y + mosaicSize);
+      }
+    }
+  }
+
   async function generateImage(forwardText, backwardText, userName) {
     const CANVAS_WIDTH = 1200;
     const CANVAS_HEIGHT = 630;
@@ -46,6 +60,8 @@ export default async (req, res) => {
     const textLines = splitByMeasureWidth(forwardText, CANVAS_WIDTH - TEXT_MARGIN_X, context);
 
     let lineY = CANVAS_HEIGHT / 2 - ((TEXT_SIZE + TEXT_LINE_MARGIN_SIZE) / 2) * (textLines.length - 1);
+
+    CreateMosaic(context, context.width, context.height, 8);
 
     textLines.forEach((line) => {
       const textWidth = context.measureText(line).width;
