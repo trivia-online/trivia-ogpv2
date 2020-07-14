@@ -1,3 +1,3 @@
 # trivia-ogp
 
-https://trivia-ogp.vercel.app/api/ogp?forwardText=雨の日は
+<img src="https://trivia-ogp.vercel.app/api/ogp?forwardText=雨の日は" />
