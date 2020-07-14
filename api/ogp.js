@@ -4,7 +4,6 @@ const { createCanvas, registerFont, loadImage } = require("canvas");
 export default async (req, res) => {
   const forwardText = req.query.forwardText || "";
   const backwardText = req.query.backwardText || "";
-  const userName = req.query.userName || "";
 
   function splitByMeasureWidth(str, maxWidth, context) {
     const lines = [];
@@ -20,7 +19,7 @@ export default async (req, res) => {
     return lines;
   }
 
-  async function generateImage(forwardText, _backwardText, userName) {
+  async function generateImage(forwardText, _backwardText) {
     const CANVAS_WIDTH = 1200;
     const CANVAS_HEIGHT = 630;
 
@@ -68,7 +67,8 @@ export default async (req, res) => {
   }
 
   try {
-    const image = await generateImage(forwardText, backwardText, userName);
+    const image = await generateImage(forwardText, backwardText);
+
     res.writeHead(200, {
       "Content-Type": "image/png",
       "Content-Length": image.length,
