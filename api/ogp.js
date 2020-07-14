@@ -20,7 +20,7 @@ export default async (req, res) => {
     return lines;
   }
 
-  async function generateImage(forwardText, backwardText, userName) {
+  async function generateImage(forwardText, _backwardText, userName) {
     const CANVAS_WIDTH = 1200;
     const CANVAS_HEIGHT = 630;
 
@@ -43,6 +43,14 @@ export default async (req, res) => {
 
     context.font = `${TEXT_SIZE}px ${FONT_FAMILY}`;
     context.fillStyle = TEXT_COLOR;
+
+    // backward の生成
+    let array = [];
+    for (let index = 0; index < _backwardText.length; index++) {
+      array.push("□");
+    }
+    const backwardText = array.join("");
+
     const textLines = [
       ...splitByMeasureWidth(forwardText, CANVAS_WIDTH - TEXT_MARGIN_X, context),
       ...splitByMeasureWidth(backwardText, CANVAS_WIDTH - TEXT_MARGIN_X, context),
