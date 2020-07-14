@@ -43,9 +43,10 @@ export default async (req, res) => {
 
     context.font = `${TEXT_SIZE}px ${FONT_FAMILY}`;
     context.fillStyle = TEXT_COLOR;
-    const textLines =
-      splitByMeasureWidth(forwardText, CANVAS_WIDTH - TEXT_MARGIN_X, context) +
-      splitByMeasureWidth(backwardText, CANVAS_WIDTH - TEXT_MARGIN_X, context);
+    const textLines = [
+      ...splitByMeasureWidth(forwardText, CANVAS_WIDTH - TEXT_MARGIN_X, context),
+      ...splitByMeasureWidth(backwardText, CANVAS_WIDTH - TEXT_MARGIN_X, context),
+    ];
 
     let lineY = CANVAS_HEIGHT / 2 - ((TEXT_SIZE + TEXT_LINE_MARGIN_SIZE) / 2) * (textLines.length - 1);
 
