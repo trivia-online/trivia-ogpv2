@@ -38,7 +38,7 @@ export default async (req, res) => {
     return backwardText
   }
 
-  async function generateImage(forwardText, _backwardText, isShow = false) {
+  async function generateImage(forwardText, _backwardText, isShow) {
     const CANVAS_WIDTH = 1200;
     const CANVAS_HEIGHT = 630;
 
