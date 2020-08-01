@@ -1,5 +1,9 @@
 import * as path from "path";
-const { createCanvas, registerFont, loadImage } = require("canvas");
+const {
+  createCanvas,
+  registerFont,
+  loadImage
+} = require("canvas");
 
 export default async (req, res) => {
   const forwardText = req.query.forwardText || "";
@@ -19,7 +23,21 @@ export default async (req, res) => {
     return lines;
   }
 
-  async function generateImage(forwardText, _backwardText) {
+  function generareBackwardText(_backwardText, isShow) {
+    if (isShow) {
+      return _backwardText
+    }
+    // backward の生成
+    let array = [];
+    for (let index = 0; index < _backwardText.length; index++) {
+      array.push("□");
+    }
+
+    const backwardText = array.join("");
+    return backwardText
+  }
+
+  async function generateImage(forwardText, _backwardText, isShow = false) {
     const CANVAS_WIDTH = 1200;
     const CANVAS_HEIGHT = 630;
 
@@ -32,7 +50,9 @@ export default async (req, res) => {
     const FONT_PATH = path.join(__dirname, "..", "fonts", "logotypejp_corpmin.ttf");
 
     const BACKGROUND_IMAGE_PATH = path.join(__dirname, "..", "images", "ogp-trivia-background.png");
-    registerFont(FONT_PATH, { family: FONT_FAMILY });
+    registerFont(FONT_PATH, {
+      family: FONT_FAMILY
+    });
     const canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
     const context = canvas.getContext("2d");
 
@@ -43,12 +63,7 @@ export default async (req, res) => {
     context.font = `${TEXT_SIZE}px ${FONT_FAMILY}`;
     context.fillStyle = TEXT_COLOR;
 
-    // backward の生成
-    let array = [];
-    for (let index = 0; index < _backwardText.length; index++) {
-      array.push("□");
-    }
-    const backwardText = array.join("");
+    const backwardText = generareBackwardText(_backwardText, isShow)
 
     const textLines = [
       ...splitByMeasureWidth(forwardText, CANVAS_WIDTH - TEXT_MARGIN_X, context),
