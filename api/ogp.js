@@ -8,6 +8,7 @@ const {
 export default async (req, res) => {
   const forwardText = req.query.forwardText || "";
   const backwardText = req.query.backwardText || "";
+  const isShow = req.query.isShow || false;
 
   function splitByMeasureWidth(str, maxWidth, context) {
     const lines = [];
@@ -82,7 +83,7 @@ export default async (req, res) => {
   }
 
   try {
-    const image = await generateImage(forwardText, backwardText);
+    const image = await generateImage(forwardText, backwardText, isShow);
 
     res.writeHead(200, {
       "Content-Type": "image/png",
