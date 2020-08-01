@@ -31,7 +31,7 @@ export default async (req, res) => {
     const FONT_FAMILY = "logotypejp_corpmin";
     const FONT_PATH = path.join(__dirname, "..", "fonts", "logotypejp_corpmin.ttf");
 
-    const BACKGROUND_IMAGE_PATH = path.join(__dirname, "..", "images", "ogp-trivia-background@2x.png");
+    const BACKGROUND_IMAGE_PATH = path.join(__dirname, "..", "images", "ogp-trivia-background.png");
     registerFont(FONT_PATH, { family: FONT_FAMILY });
     const canvas = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
     const context = canvas.getContext("2d");
