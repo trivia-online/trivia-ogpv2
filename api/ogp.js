@@ -31,7 +31,7 @@ export default async (req, res) => {
     // backward の生成
     let array = [];
     for (let index = 0; index < _backwardText.length; index++) {
-      array.push("□");
+      array.push("○");
     }
 
     const backwardText = array.join("");
