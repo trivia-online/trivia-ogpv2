@@ -6,9 +6,7 @@ const {
 } = require("canvas");
 
 export default async (req, res) => {
-  const forwardText = req.query.forwardText || "";
-  const backwardText = req.query.backwardText || "";
-  const isShow = req.query.isShow || false;
+  const text = req.query.text || "";
 
   function splitByMeasureWidth(str, maxWidth, context) {
     const lines = [];
@@ -24,21 +22,7 @@ export default async (req, res) => {
     return lines;
   }
 
-  function generareBackwardText(_backwardText, isShow) {
-    if (isShow) {
-      return _backwardText
-    }
-    // backward の生成
-    let array = [];
-    for (let index = 0; index < _backwardText.length; index++) {
-      array.push("○");
-    }
-
-    const backwardText = array.join("");
-    return backwardText
-  }
-
-  async function generateImage(forwardText, _backwardText, isShow) {
+  async function generateImage(text) {
     const CANVAS_WIDTH = 1200;
     const CANVAS_HEIGHT = 630;
 
@@ -64,12 +48,7 @@ export default async (req, res) => {
     context.font = `${TEXT_SIZE}px ${FONT_FAMILY}`;
     context.fillStyle = TEXT_COLOR;
 
-    const backwardText = generareBackwardText(_backwardText, isShow)
-
-    const textLines = [
-      ...splitByMeasureWidth(forwardText, CANVAS_WIDTH - TEXT_MARGIN_X, context),
-      ...splitByMeasureWidth(backwardText, CANVAS_WIDTH - TEXT_MARGIN_X, context),
-    ];
+    const textLines = splitByMeasureWidth(text, CANVAS_WIDTH - TEXT_MARGIN_X, context)
 
     let lineY = CANVAS_HEIGHT / 2 - ((TEXT_SIZE + TEXT_LINE_MARGIN_SIZE) / 2) * (textLines.length - 1);
 
@@ -83,7 +62,7 @@ export default async (req, res) => {
   }
 
   try {
-    const image = await generateImage(forwardText, backwardText, isShow);
+    const image = await generateImage(text);
 
     res.writeHead(200, {
       "Content-Type": "image/png",
