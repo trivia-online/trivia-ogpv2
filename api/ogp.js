@@ -24,7 +24,7 @@ export default async (req, res) => {
 
   async function generateImage(text) {
     const CANVAS_WIDTH = 1200;
-    const CANVAS_HEIGHT = 630;
+    const CANVAS_HEIGHT = 660;
 
     const TEXT_COLOR = "#000000";
     const TEXT_SIZE = 60;
